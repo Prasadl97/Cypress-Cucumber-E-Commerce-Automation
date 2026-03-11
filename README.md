@@ -86,8 +86,6 @@ cypress-cucumber/
 - **Reusable components**: HeaderComponent, FormComponent for shared UI patterns
 - **External test data**: `data/test-data.json` for static test data
 - **Dynamic data**: `IdUtils.generateUniqueEmail()` for unique registration emails
-- **No hardcoded waits**: Cypress built-in retries via `cy.get().should()`
-- **Parallel execution**: cypress-split for CI (GitHub Actions matrix)
 
 ## Environment
 
