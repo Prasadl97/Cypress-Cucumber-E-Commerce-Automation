@@ -1,4 +1,4 @@
-import { UILoggerUtils } from './UILoggerUtils.js';
+import { Logger } from './Logger.js';
 
 interface VerificationFailure {
   step: string;
@@ -6,7 +6,7 @@ interface VerificationFailure {
 }
 
 /**
- * Simple soft assertion utility for Playwright tests.
+ * Soft assertion utility for Cypress tests.
  * Collects verification failures and reports them at the end with assertAll().
  * For Cucumber: call setScenarioId() in Before hook, assertAll() in After hook.
  */
@@ -26,7 +26,7 @@ export class AssertUtils {
     const id = this.getTestId();
     if (!this.failures.has(id)) this.failures.set(id, []);
     this.failures.get(id)!.push({ step, details });
-    UILoggerUtils.warn(`Soft assertion failed: ${step} - ${details}`);
+    Logger.warn(`Soft assertion failed: ${step} - ${details}`);
   }
 
   /** Run a verification; record failure but don't throw. */
@@ -46,7 +46,7 @@ export class AssertUtils {
     }
   }
 
-  /** Run a Playwright expect; record failure but don't throw. */
+  /** Run a Cypress-style assertion; record failure but don't throw. */
   static async verifyExpect(step: string, fn: () => Promise<void>, details: string): Promise<boolean> {
     try {
       await fn();
@@ -69,7 +69,7 @@ export class AssertUtils {
     }
 
     this.failures.delete(id);
-    const summary = list.map(f => `  - ${f.step}: ${f.details}`).join('\n');
+    const summary = list.map((f) => `  - ${f.step}: ${f.details}`).join('\n');
     throw new Error(`Soft assertion(s) failed: ${testName}\n${summary}`);
   }
 

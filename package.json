@@ -1,30 +1,25 @@
 {
-  "name": "playwright-cucumber",
+  "name": "cypress-cucumber",
   "version": "1.0.0",
-  "description": "E2E tests with Playwright and Cucumber BDD",
+  "description": "E2E tests with Cypress and Cucumber BDD",
   "type": "module",
   "scripts": {
-    "test": "node --import tsx node_modules/@cucumber/cucumber/bin/cucumber-js",
-    "test:headed": "node --import tsx node_modules/@cucumber/cucumber/bin/cucumber-js --profile headed",
-    "test:ui": "node --import tsx node_modules/@cucumber/cucumber/bin/cucumber-js --profile ui",
-    "test:firefox": "cross-env BROWSER=firefox node --import tsx node_modules/@cucumber/cucumber/bin/cucumber-js",
-    "test:firefox:headed": "cross-env BROWSER=firefox node --import tsx node_modules/@cucumber/cucumber/bin/cucumber-js --profile headed",
-    "test:webkit": "cross-env BROWSER=webkit node --import tsx node_modules/@cucumber/cucumber/bin/cucumber-js",
-    "test:webkit:headed": "cross-env BROWSER=webkit node --import tsx node_modules/@cucumber/cucumber/bin/cucumber-js --profile headed",
-    "test:all-browsers": "npm test && npm run test:firefox && npm run test:webkit",
-    "test:all": "node --import tsx node_modules/@cucumber/cucumber/bin/cucumber-js --profile headed src/features/",
-    "test:smoke": "node --import tsx node_modules/@cucumber/cucumber/bin/cucumber-js --tags \"@smoke\"",
-    "test:admin": "node --import tsx node_modules/@cucumber/cucumber/bin/cucumber-js --tags \"@admin\"",
-    "test:cart": "node --import tsx node_modules/@cucumber/cucumber/bin/cucumber-js --tags \"@cart\""
+    "test": "cypress run",
+    "test:headed": "cypress run --headed",
+    "test:open": "cypress open",
+    "test:smoke": "cypress run --env tags=@smoke",
+    "test:admin": "cypress run --env tags=@admin",
+    "test:admin:headed": "cypress run --browser firefox --headed --env tags=@admin",
+    "test:cart": "cypress run --env tags=@cart",
+    "test:registration": "cypress run --env tags=@registration"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "^11.0.0",
-    "@cucumber/pretty-formatter": "^1.0.0",
-    "@playwright/test": "^1.49.0",
+    "@badeball/cypress-cucumber-preprocessor": "^22.0.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.3",
     "@types/node": "^22.0.0",
-    "cross-env": "^7.0.3",
-    "playwright": "^1.49.0",
-    "tsx": "^4.19.0",
+    "cypress": "^13.15.0",
+    "cypress-split": "^1.14.0",
+    "esbuild": "^0.24.0",
     "typescript": "^5.6.0"
   }
 }

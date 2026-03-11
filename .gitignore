@@ -5,3 +5,6 @@ dist/
 data/entities/registered-user.json
 .playwright-mcp/
 reports/
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/

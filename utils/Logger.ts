@@ -1,11 +1,11 @@
-import type { Page } from 'playwright';
-
 /**
- * Simple UI logging for test output.
- * Colored console output, scenario summaries, and page info.
+ * Logging utility for Cypress tests.
+ * Colored console output, scenario summaries, and Cypress log integration.
  */
-export class UILoggerUtils {
-  private static isCI = !!(process.env.CI || process.env.NO_COLOR || process.env.JENKINS_URL);
+export class Logger {
+  private static isCI =
+    typeof process !== 'undefined' &&
+    !!(process.env.CI || process.env.NO_COLOR || process.env.JENKINS_URL);
   private static readonly R = this.isCI ? '' : '\u001B[31m';
   private static readonly G = this.isCI ? '' : '\u001B[32m';
   private static readonly Y = this.isCI ? '' : '\u001B[33m';
@@ -30,7 +30,7 @@ export class UILoggerUtils {
   }
 
   static debug(message: string): void {
-    if (process.env.DEBUG) console.log(`${this.B}[DEBUG] ${message}${this.X}`);
+    if (typeof process !== 'undefined' && process.env.DEBUG) console.log(`${this.B}[DEBUG] ${message}${this.X}`);
   }
 
   /** Log a simple key-value summary table. */
@@ -45,14 +45,10 @@ export class UILoggerUtils {
     console.log(`${this.G}${out}${this.X}`);
   }
 
-  /** Log current page URL and title. */
-  static async logPageInfo(page: Page, stepName: string): Promise<void> {
-    try {
-      const url = page.url();
-      const title = await page.title();
-      this.info(`${stepName} | ${title} | ${url}`);
-    } catch {
-      this.warn(`Could not log page info: ${stepName}`);
+  /** Log to Cypress runner (call from within cy context). */
+  static cyLog(message: string): void {
+    if (typeof cy !== 'undefined') {
+      cy.log(message);
     }
   }
 }

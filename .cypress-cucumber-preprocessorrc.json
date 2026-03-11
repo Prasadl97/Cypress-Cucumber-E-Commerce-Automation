@@ -1,0 +1,9 @@
+{
+  "e2e": {
+    "stepDefinitions": [
+      "cypress/step-definitions/**/*.ts"
+    ],
+    "filterSpecs": true,
+    "omitFiltered": true
+  }
+}
