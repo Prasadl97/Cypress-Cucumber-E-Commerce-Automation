@@ -36,14 +36,8 @@ export default defineConfig({
         })
       );
       on('task', {
-        saveRegisteredUser: async ({
-          path,
-          data,
-        }: {
-          path: string;
-          data: { email: string; password?: string };
-        }) => {
-          await saveRegisteredUser(path, data);
+        saveRegisteredUser: async (args: { path: string; data: { email: string; password?: string } }) => {
+          await saveRegisteredUser(args.path, args.data);
           return null;
         },
         loadRegisteredUser: async (path: string) => {
