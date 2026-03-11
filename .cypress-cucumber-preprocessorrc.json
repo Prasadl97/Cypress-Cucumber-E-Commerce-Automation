@@ -1,7 +1,8 @@
 {
   "e2e": {
     "stepDefinitions": [
-      "cypress/step-definitions/**/*.ts"
+      "cypress/step-definitions/**/*.ts",
+      "cypress/support/hooks.ts"
     ],
     "filterSpecs": true,
     "omitFiltered": true

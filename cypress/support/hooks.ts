@@ -1,7 +1,7 @@
 import { Before, After } from '@badeball/cypress-cucumber-preprocessor';
 import { AssertUtils } from '../../utils/AssertUtils.js';
 import { Logger } from '../../utils/Logger.js';
-import { clearContext } from '../support/context.js';
+import { clearContext } from './context.js';
 
 Before(function ({ pickle }) {
   Logger.info(`Scenario: ${pickle.name}`);
