@@ -1,15 +1,16 @@
-import { defineConfig } from 'cypress';
-import { addCucumberPreprocessorPlugin } from '@badeball/cypress-cucumber-preprocessor';
-import { createEsbuildPlugin } from '@badeball/cypress-cucumber-preprocessor/esbuild';
-import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
-import cypressSplit from 'cypress-split';
-import { saveRegisteredUser, loadRegisteredUser } from './utils/EntityStore.js';
+/* eslint-disable @typescript-eslint/no-require-imports */
+const { defineConfig } = require('cypress');
+const { addCucumberPreprocessorPlugin } = require('@badeball/cypress-cucumber-preprocessor');
+const { createEsbuildPlugin } = require('@badeball/cypress-cucumber-preprocessor/esbuild');
+const createBundler = require('@bahmutov/cypress-esbuild-preprocessor');
+const cypressSplit = require('cypress-split');
+const { saveRegisteredUser, loadRegisteredUser } = require('./utils/EntityStore.cjs');
 
 const baseURL = process.env.BASE_URL ?? 'https://magento2-demo.magebit.com/';
 const adminBaseURL = process.env.ADMIN_BASE_URL ?? `${baseURL.replace(/\/?$/, '')}/admin/`;
 const entityFilePath = process.env.ENTITY_FILE_PATH ?? './data/entities/registered-user.json';
 
-export default defineConfig({
+module.exports = defineConfig({
   e2e: {
     baseUrl: baseURL,
     specPattern: 'cypress/e2e/**/*.feature',
@@ -36,11 +37,11 @@ export default defineConfig({
         })
       );
       on('task', {
-        saveRegisteredUser: async (args: { path: string; data: { email: string; password?: string } }) => {
+        saveRegisteredUser: async (args) => {
           await saveRegisteredUser(args.path, args.data);
           return null;
         },
-        loadRegisteredUser: async (path: string) => {
+        loadRegisteredUser: async (path) => {
           return await loadRegisteredUser(path);
         },
       });

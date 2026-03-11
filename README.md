@@ -69,11 +69,12 @@ cypress-cucumber/
 │   └── entities/                # Persisted entities (e.g. registered-user.json)
 ├── utils/
 │   ├── AssertUtils.ts          # Soft assertions
-│   ├── EntityStore.ts          # Persist/load user JSON
+│   ├── EntityStore.ts          # Persist/load user JSON (TypeScript)
+│   ├── EntityStore.cjs         # Persist/load user JSON (used by config)
 │   ├── IdUtils.ts              # Dynamic email generation
 │   └── Logger.ts               # Logging utility
 ├── .cypress-cucumber-preprocessorrc.json
-├── cypress.config.ts
+├── cypress.config.cjs          # CommonJS config (avoids ts-node parsing issues in CI)
 ├── package.json
 ├── tsconfig.json
 └── README.md
@@ -96,7 +97,7 @@ cypress-cucumber/
 
 ## CI (GitHub Actions)
 
-The `.github/workflows/e2e.yml` workflow runs tests on push/PR to main/master. It uses a 2-container matrix with cypress-split for parallel execution. Artifacts (videos, screenshots) are uploaded on failure.
+The `.github/workflows/e2e.yml` workflow runs tests on push/PR to main/master. Artifacts (videos, screenshots) are uploaded on failure.
 
 ## Notes
 
