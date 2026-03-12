@@ -10,7 +10,7 @@ Given('I am on the admin login page', function () {
   adminLoginPage.gotoAdminLogin();
 });
 
-When('I log in to the admin', function () {
+When('I log in as the admin', function () {
   const { username, password } = TestDataLoader.load().admin;
   adminLoginPage.login(username, password);
 });;
