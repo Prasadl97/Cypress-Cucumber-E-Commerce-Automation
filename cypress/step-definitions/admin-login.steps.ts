@@ -1,6 +1,7 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import { AdminLoginPage } from '../../pages/AdminLoginPage.js';
 import { AdminOrdersPage } from '../../pages/AdminOrdersPage.js';
+import { TestDataLoader } from '../../configs/TestDataLoader.js';
 
 const adminLoginPage = new AdminLoginPage();
 const adminOrdersPage = new AdminOrdersPage();
